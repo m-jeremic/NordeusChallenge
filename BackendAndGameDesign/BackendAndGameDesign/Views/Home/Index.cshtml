@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Club>
+
+<h6 class="bg-primary text-white text-center m-2 p-2">Clubs Table</h6>
+<div class="m-2">
+    <table class="table table-sm table-striped table-bordered">
+        <thead class="bg-secondary text-white">
+            <tr>
+                <td>Name</td>
+                <td>Rating</td>
+                <td>Goals Per Game</td>
+                <td>Conceded Goals Per Game</td>
+                <td>Red Cards Per Game</td>
+                <td>Yellow Cards Per Game</td>
+                <td>Is Default Team</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Club club in Model)
+            {
+                <tr>
+                    <td>@club.Name</td>
+                    <td>@club.Rating</td>
+                    <td>@club.ScoredGoals</td>
+                    <td>@club.ConcededGoals</td>
+                    <td>@club.RedCards</td>
+                    <td>@club.YellowCards</td>
+                    <td>@(club.isDefault == 0 ? "Yes": "No")</td>
+                    <td class="text-center">
+                        <form method="post">
+                            <a asp-action="Edit" asp-route-id="@club.Id" class="btn btn-sm btn-warning">Edit</a>
+                            <button type="submit" asp-action="Delete" asp-route-id="@club.Id" class="btn btn-sm btn-danger">Delete</button>
+                        </form>                       
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="m-2">
+    <a asp-action="Edit" class="btn btn-sm btn-success">Create Team</a>
+</div>
+
+<div class="m-2">
+    <form method="get" asp-action="CreateMatchups">
+        <select name="allClubs" id="allClubs">
+            <option value="0" selected>All Clubs</option>
+            <option value="1">Default Clubs</option>
+            <option value="2">Created Clubs</option>
+        </select>
+        <button type="submit" class="btn btn-sm btn-primary">Create Matchups</button>
+    </form>
+</div>
+

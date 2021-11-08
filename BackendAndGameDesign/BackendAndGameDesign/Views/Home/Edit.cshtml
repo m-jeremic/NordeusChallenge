@@ -1,0 +1,76 @@
+﻿@model Club
+
+@{ 
+    int counter = 0;
+}
+
+<h6 class="bg-primary text-white text-center m-2 p-2">Team Table</h6>
+
+<form method="post">
+    <div class="m-2">
+        <table class="table table-sm table-striped table-bordered">
+            <thead class="bg-secondary text-white">
+                <tr>
+                    <td>Name</td>
+                    <td>Rating</td>
+                    <td>Goals Per Game</td>
+                    <td>Conceded Goals Per Game</td>
+                    <td>Red Cards Per Game</td>
+                    <td>Yellow Cards Per Game</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input name="Name" value="@Model.Name"/></td>
+                    <td><input name="Rating" value="@Model.Rating" /></td>
+                    <td><input name="ScoredGoals" value="@Model.ScoredGoals" /></td>
+                    <td><input name="ConcededGoals" value="@Model.ConcededGoals" /></td>
+                    <td><input name="RedCards" value="@Model.RedCards" /></td>
+                    <td><input name="YellowCards" value="@Model.YellowCards" /></td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h6 class="bg-primary text-white text-center m-2 p-2">Team Players</h6>
+    <div class="m-2">
+        <div class="table table-sm table-striped table-bordered">
+                @foreach (Player player in Model.Players)
+                {
+                    <div class="form-group row">
+                        <div class="col-3 text-center">Name</div>
+                        <div class="col-3">
+                            <input name="Players[@counter++].Name" class="form-control" value="@player.Name" />
+                        </div>
+                        <div class="col-3 text-center">Rating</div>
+                        <div class="col-3">
+                            <input name="Players[@counter++].Rating" class="form-control" value="@player.Rating" />
+                        </div>
+                    </div>
+                }
+                @for (int i = Model.Players.Count(); i < 30; i++)
+                {
+                    <div class="form-group row">
+                        <div class="col-3 text-center">Name</div>
+                        <div class="col-3">
+                            <input name="Players[@i].Name"  class="form-control"  value="" />
+                        </div>
+                        <div class="col-3 text-center">Rating</div>
+                        <div class="col-3">
+                            <input name="Players[@i].Rating" class="form-control" value="" />
+                        </div>
+                    </div>
+                }
+        </div>
+    </div>
+    <div class="m-2">
+        <button type="submit" class="btn-primary">Save Team</button>
+    </div>
+</form>
+
+
+<div class="m-2">
+    <a asp-action="Index" class="btn btn-sm btn-primary">Back to Teams Table</a>
+</div>
+

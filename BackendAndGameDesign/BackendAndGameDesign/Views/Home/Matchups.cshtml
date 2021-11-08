@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Matchup>
+
+<h6 class="bg-primary text-white text-center m-2 p-2">Matchups Table</h6>
+<div class="m-2">
+    <table class="table table-sm table-striped table-bordered">
+        <thead class="bg-secondary text-white text-center">
+            <tr>
+                <td>Team A</td>
+                <td>Team B</td>
+                <td>Result</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Matchup matchup in Model)
+            {
+                <tr class="text-center">
+                    <td>@matchup.TeamA.Name</td>
+                    <td>@(matchup.TeamB == null ? "<NoMatchup>" : matchup.TeamB.Name)</td>
+                    <td>@matchup.Result</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="m-2">
+    <a asp-action="Index" class="btn btn-sm btn-primary">Back to Teams Table</a>
+</div>
